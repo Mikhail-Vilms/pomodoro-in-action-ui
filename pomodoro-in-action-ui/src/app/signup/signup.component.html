@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-2 col-0"></div>
+        <div class="col-md-4 col-sm-8 col-12">
+            <mat-card>
+                <mat-card-title>Sign up for your account</mat-card-title>
+                <mat-card-content>
+                    <form class="form" [formGroup]="signupFormGroup" (submit)="onSubmit()">
+                        
+                        <mat-form-field class="form-element">
+                          <input matInput type="text" placeholder="Username" formControlName="username" required>
+                          <mat-error *ngIf="signupFormGroup.controls['username'].touched && !signupFormGroup.valid">
+                            {{ getErrorUsername() }}
+                          </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-element">
+                            <input matInput type="email" placeholder="Email" formControlName="email" required>
+                            <mat-error *ngIf="signupFormGroup.controls['email'].touched && !signupFormGroup.controls['email'].valid">
+                                {{ getErrorEmail() }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-element">   
+                            <input matInput type="password" placeholder="Password" formControlName="password" required>
+                            <mat-error *ngIf="signupFormGroup.controls['password'].touched && !signupFormGroup.controls['password'].valid">
+                                {{ getErrorPassword() }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-element">
+                            <input matInput type= "password" placeholder="Password confirmation" formControlName="confirm" required>
+                            <mat-error *ngIf="signupFormGroup.controls['confirm'].touched && !signupFormGroup.controls['confirm'].valid">
+                                {{ getErrorConfirm() }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-error class="general-error"> {{ generalError }} </mat-error>
+
+                        <div class="button">
+                            <button mat-raised-button color="accent" type="submit">Sign Up</button>
+                        </div>
+
+                        <mat-divider class="divider" [inset]="true"> </mat-divider>
+                            
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign up with Google</button>
+                        </div>    
+                        
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign up with Facebook</button>
+                        </div>
+
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign up with Twitter</button>
+                        </div>
+
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign up with Microsoft</button>
+                        </div>
+
+                        <mat-divider class="divider" [inset]="true"> </mat-divider>
+                        
+                        <div class="justify-center">
+                            <a routerLink="/signin">Sign in instead</a>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-2 col-0"></div>
+    </div>
+</div>
