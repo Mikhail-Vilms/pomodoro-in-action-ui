@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-2 col-0"></div>
+        <div class="col-md-4 col-sm-8 col-12">
+            <mat-card>
+                <mat-card-title>Sign in for your account</mat-card-title>
+                <mat-card-content>
+                    <form class="form" [formGroup]="signinFormGroup" (submit)="onSubmit()">
+
+                        <mat-form-field class="form-element">
+                            <input matInput type="email" placeholder="Email" formControlName="email" required>
+                            <mat-error *ngIf="signinFormGroup.controls['email'].touched && !signinFormGroup.controls['email'].valid">
+                                {{ getErrorEmail() }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-element">
+                            <input matInput type="password" placeholder="Password" formControlName="password" required>
+                            <mat-error *ngIf="signinFormGroup.controls['password'].touched && !signinFormGroup.controls['password'].valid">
+                                {{ getErrorPassword() }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-error class="general-error">
+                            {{ generalError }}
+                        </mat-error>
+                        
+                        <div class="button">
+                            <button mat-raised-button color="accent" type="submit">Sign In</button>
+                        </div>
+
+                        <mat-divider class="divider" [inset]="true"> </mat-divider>
+                            
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign in with Google</button>
+                        </div>    
+                        
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign in with Facebook</button>
+                        </div>
+
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign in with Twitter</button>
+                        </div>
+
+                        <div class="social-button-div">
+                            <button class="social-button" mat-raised-button color="primary">Sign in with Microsoft</button>
+                        </div>
+
+                        <mat-divider class="divider" [inset]="true"> </mat-divider>
+                        
+                        <div class="justify-center">
+                            <a routerLink="/signup">Sign up instead</a>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-2 col-0"></div>
+    </div>
+</div>
