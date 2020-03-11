@@ -1,1 +1,20 @@
-<p>dashboard works!</p>
+<app-main-toolbar></app-main-toolbar>
+
+<ng-container>
+    <div class="row">
+        <div class="col-sm-0 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="col-sm-12 col-md-10 col-lg-10 col-xl-10">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title> My active kanban boards </mat-panel-title>
+                        <mat-panel-description> {{panelOpenState ? 'collapse' : 'expand'}} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <app-my-boards></app-my-boards>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-1 col-xl-1"></div>
+    </div>
+</ng-container>

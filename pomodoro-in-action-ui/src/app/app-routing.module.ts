@@ -6,6 +6,7 @@ import { SignupSuccessComponent } from './signup-success/signup-success.componen
 import { SigninComponent } from './signin/signin.component';
 import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BoardCreateComponent } from './board-create/board-create.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'signup-success', component: SignupSuccessComponent },
   { path: 'signin', component: SigninComponent },
 
-  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard]},
+  // { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent},
+  {path: 'create-board', component: BoardCreateComponent}
 ];
 
 @NgModule({

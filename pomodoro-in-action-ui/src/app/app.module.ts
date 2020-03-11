@@ -14,6 +14,10 @@ import { SignupSuccessComponent } from './signup-success/signup-success.componen
 import { HttpClientModule } from '@angular/common/http';
 import { SigninComponent } from './signin/signin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BoardGridElementComponent } from './board-grid-element/board-grid-element.component';
+import { MyBoardsComponent } from './my-boards/my-boards.component';
+import { BoardCreateComponent } from './board-create/board-create.component';
+import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupComponent,
     SignupSuccessComponent,
     SigninComponent,
-    DashboardComponent
-
+    DashboardComponent,
+    BoardGridElementComponent,
+    MyBoardsComponent,
+    BoardCreateComponent,
+    MainToolbarComponent,
 
   ],
   imports: [
@@ -36,11 +43,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     LayoutModule,
     HttpClientModule,
-    
+
     // Angular material components
     MaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[
+    BoardGridElementComponent
+  ]
 })
 export class AppModule { }

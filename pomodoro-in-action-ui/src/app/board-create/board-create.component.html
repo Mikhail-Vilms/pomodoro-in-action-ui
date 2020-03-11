@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-2 col-0"></div>
+        <div class="col-md-4 col-sm-8 col-12">
+            <mat-card>
+                <mat-card-title>Create new board</mat-card-title>
+                <mat-card-content>
+                    <form class="form" [formGroup]="formGroup" (submit)="createNewBoard()">
+                        <mat-form-field class="form-element">
+                            <input matInput type="Title" placeholder="Title" formControlName="name" required>
+                        </mat-form-field>
+                        <mat-form-field class="form-element">
+                            <input matInput type="Description" placeholder="Description" formControlName="description">
+                        </mat-form-field>
+                        <div class="button">
+                            <button mat-raised-button class="add-button" type="submit">Create</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-2 col-0"></div>
+    </div>
+</div>
