@@ -11,8 +11,14 @@
 
 <div class="cards-container">
   <div class="card" *ngFor="let board of boards">
+
+    <a routerLink="/boards/{{board.id}}" routerLinkActive="active">
+
     <h3>{{board.displayName}}</h3>
     <mat-divider class="divider"> </mat-divider>
     <p>{{board.description}}</p>
+
+    </a>
+
   </div>
 </div>

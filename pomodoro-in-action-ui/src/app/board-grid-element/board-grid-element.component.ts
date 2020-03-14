@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Board } from '../models/board';
+import { Board } from '../model/board';
 
 @Component({
   selector: 'app-board-grid-element',

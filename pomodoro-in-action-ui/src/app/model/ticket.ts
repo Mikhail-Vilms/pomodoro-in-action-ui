@@ -1,8 +1,8 @@
-export class Board {
+export class Ticket {
     id : number;
     displayName: string;
     description: string;
     sortOrder: number;
-    isPublic: boolean;
-    isArchived: boolean;
+
+    containerId: number;
 }

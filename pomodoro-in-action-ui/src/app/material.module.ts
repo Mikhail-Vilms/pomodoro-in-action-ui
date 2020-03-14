@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { 
   MatButtonModule, 
   MatIconModule, 
@@ -8,8 +9,14 @@ import {
   MatInputModule,
   MatDividerModule,
   MatGridListModule, 
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialogModule,
+  // MatDialogRef
 } from '@angular/material';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+// import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -22,7 +29,10 @@ import {
     MatInputModule,
     MatDividerModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DragDropModule,
+    MatDialogModule,
+    // MatDialogRef
   ],
   exports: [
     MatButtonModule, 
@@ -33,7 +43,10 @@ import {
     MatInputModule,
     MatDividerModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DragDropModule,
+    MatDialogModule,
+    // MatDialogRef
   ]
 })
 

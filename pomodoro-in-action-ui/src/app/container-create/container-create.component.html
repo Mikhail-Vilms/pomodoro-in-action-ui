@@ -1,0 +1,18 @@
+<h1 class="justify-center" mat-dialog-title>Add new container</h1>
+
+<form class="form" [formGroup]="newContainerGroup" (submit)="onAddClick()">
+    <div mat-dialog-content>
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Title" formControlName="displayName" required>
+        </mat-form-field>
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button type="submit">Add</button>
+    </div>
+</form>

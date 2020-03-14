@@ -7,6 +7,7 @@ import { SigninComponent } from './signin/signin.component';
 import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BoardCreateComponent } from './board-create/board-create.component';
+import { BoardComponent } from './board/board.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -16,7 +17,9 @@ const routes: Routes = [
 
   // { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent},
-  {path: 'create-board', component: BoardCreateComponent}
+  { path: 'create-board', component: BoardCreateComponent},
+
+  { path: 'boards/:id', component: BoardComponent}
 ];
 
 @NgModule({
