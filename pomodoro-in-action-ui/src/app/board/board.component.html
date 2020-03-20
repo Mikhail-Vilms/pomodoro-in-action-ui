@@ -7,17 +7,15 @@
         
         <h5 class="container-header">{{container.displayName}}</h5>
         
-        <div cdkDropList class="tickets-list" id={{container.id}} [cdkDropListData]=container.tickets (cdkDropListDropped)="dropTicket($event)" [cdkDropListConnectedTo]="getConnectedList()">
+        <div cdkDropList class="tickets-list" id={{container.id}} [cdkDropListData]=container.tickets (cdkDropListDropped)="dropTicket($event, container.id)" [cdkDropListConnectedTo]="getConnectedList()">
           <div class="ticket-box" *ngFor="let ticket of container.tickets" cdkDrag [cdkDragData]="ticket">{{ticket.displayName}}</div>
         </div>
         
-        <div class="new-ticket-box">
-          + Add new ticket
-        </div>
+        <div class="new-ticket-box" (click)="openDialogCreateTicket(container)">+</div>
       </div>
 
       <div class="canban-container">
-        <h4 class="container-header" (click)="openDialog()">+ Add new container</h4>
+        <h2 class="container-header" (click)="openDialogCreateContainer()">+</h2>
       </div>
 
     </div>

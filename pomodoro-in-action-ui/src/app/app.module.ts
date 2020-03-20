@@ -20,6 +20,8 @@ import { BoardCreateComponent } from './board-create/board-create.component';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { BoardComponent } from './board/board.component';
 import { ContainerCreateComponent } from './container-create/container-create.component';
+import { TicketCreateComponent } from './ticket-create/ticket-create.component';
+import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ContainerCreateComponent } from './container-create/container-create.co
     MainToolbarComponent,
     BoardComponent,
     ContainerCreateComponent,
+    TicketCreateComponent,
+    TicketDetailsComponent,
 
   ],
   imports: [
