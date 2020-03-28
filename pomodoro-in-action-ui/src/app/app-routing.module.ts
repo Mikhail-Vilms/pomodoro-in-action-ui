@@ -8,6 +8,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BoardCreateComponent } from './board-create/board-create.component';
 import { BoardComponent } from './board/board.component';
+import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'create-board', component: BoardCreateComponent},
 
-  { path: 'boards/:id', component: BoardComponent}
+  { path: 'boards/:id', component: BoardComponent},
+  { path: 'tickets/:id', component: TicketDetailsComponent },
 ];
 
 @NgModule({

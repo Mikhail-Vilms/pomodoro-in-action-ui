@@ -1,17 +1,65 @@
-<!-- <h1 class="justify-center" mat-dialog-title>Ticket </h1>
+<ng-container>
+    <div class="row">
+        <div class="col-sm-0 col-md-2 col-lg-2 col-xl-2"></div>
+        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
 
-<form class="form" [formGroup]="newTicketGroup" (submit)="onAddClick()">
-    <div mat-dialog-content>
-        <mat-form-field class="form-element">
-            <input matInput placeholder="Title" formControlName="displayName" required>
-        </mat-form-field>
-        <mat-form-field class="form-element">
-            <input matInput placeholder="Description" formControlName="description">
-        </mat-form-field>
-    </div>
 
-    <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()">Cancel</button>
-        <button mat-button type="submit">Add</button>
+            <mat-card class="example-card">
+                <form class="form" [formGroup]="formGroup" (submit)="switchEditable()">
+
+                    <mat-card-header>
+                        <mat-card-title>                    
+                            <mat-form-field class="form-element">
+                                <input matInput formControlName="name" required>
+                            </mat-form-field>
+                        </mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <mat-form-field class="form-element">
+                            <textarea 
+                                matInput
+                                cdkTextareaAutosize
+                                cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="20"
+                                placeholder="Description" 
+                                formControlName="description">
+                            </textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>Cancel</button>
+                        <button mat-button>Save</button>
+                        <button mat-button>Delete</button>
+                      </mat-card-actions>
+                </form>
+            </mat-card>
+
+            <!-- <form class="form" [formGroup]="formGroup" (submit)="switchEditable()">
+                <div mat-dialog-content>
+                    <mat-form-field class="form-element">
+                        <input matInput placeholder="Title" formControlName="name" required>
+                    </mat-form-field>
+                    <mat-form-field class="form-element">
+                        <textarea 
+                        matInput
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="5"
+                        cdkAutosizeMaxRows="20"
+                        placeholder="Description" 
+                        formControlName="description">
+                    </textarea>
+                    </mat-form-field>
+                </div>
+
+                <div mat-dialog-actions>
+                    <button mat-button >Cancel</button>
+                    <button mat-button type="submit">Add</button>
+                </div>
+            </form> -->
+
+
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-1 col-xl-1"></div>
     </div>
-</form> -->
+</ng-container>

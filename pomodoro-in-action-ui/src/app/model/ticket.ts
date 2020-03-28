@@ -2,6 +2,7 @@ export class Ticket {
     id : number;
     displayName: string;
     description: string;
+    
     sortOrder: number;
 
     containerId: number;

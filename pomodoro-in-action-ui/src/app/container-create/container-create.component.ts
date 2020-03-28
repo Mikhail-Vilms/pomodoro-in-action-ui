@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ContainersService } from 'src/app/services/containers.service';
 import { Board } from '../model/board';
+import { Container } from '../model/container';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-container-create',
@@ -12,13 +13,11 @@ import { Board } from '../model/board';
 })
 export class ContainerCreateComponent implements OnInit {
   private currentBoard: Board;
-  private newContainerJson;
-  newContainerGroup: FormGroup;
+  formGroup: FormGroup;
   
   constructor(
     private formBuilder: FormBuilder,
     private containersService: ContainersService,
-    private router: Router,
     public dialogRef: MatDialogRef<ContainerCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { 
       this.currentBoard = data["currentBoard"] as Board;
@@ -29,40 +28,41 @@ export class ContainerCreateComponent implements OnInit {
   }
 
   initCreateContainerForm() {
-    this.newContainerGroup = this.formBuilder.group({
-      displayName: ['', Validators.required],
+    this.formGroup = this.formBuilder.group({
+      name: ['', Validators.required],
       description: ['', []]
     });
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  onAddClick() {
-    if (!this.newContainerGroup.valid) {
+  createNewContainer() {
+    if (!this.formGroup.valid) {
       return;
     }
-
-    this.newContainerJson = {
-      "displayName": this.newContainerGroup.value.displayName,
-      "descripiton": this.newContainerGroup.value.description,
+    
+    let newContainerJson = {
+      "displayName": this.formGroup.value.name,
+      "descripiton": this.formGroup.value.description,
       "sortOrder": this.currentBoard.containers.length,
       "boardId": this.currentBoard.id
     };
+    
+    this.containersService.createNewContainer(newContainerJson)
+      .subscribe(response => {
+        let createdContainer = 
+        {
+          id: response["id"],
+          displayName: response["displayName"],
+          description: response["description"],
+          boardId: response["boardId"],
+        } as Container;
 
-    this.containersService
-      .createNewContainer(
-        this.newContainerJson
-      )
-      .subscribe((res: any) => {
-        this.router
-          .navigate(['/boards/' + this.currentBoard.id])
-          .then(() => {
-            window.location.reload();
-          });
+        this.dialogRef.close({createdContainer: createdContainer});
       },
       err => {
       });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

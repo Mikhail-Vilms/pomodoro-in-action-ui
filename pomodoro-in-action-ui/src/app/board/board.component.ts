@@ -6,8 +6,10 @@ import { Container } from '../model/container';
 import { Ticket } from '../model/ticket';
 import { ContainerCreateComponent } from '../container-create/container-create.component';
 import { BoardsService } from 'src/app/services/boards.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TicketCreateComponent } from '../ticket-create/ticket-create.component';
+import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
+import { TicketsService } from '../services/tickets.service';
 
 @Component({
   selector: 'app-board',
@@ -19,13 +21,16 @@ export class BoardComponent implements OnInit {
   boardId;
 
   constructor(
+    private router: Router, 
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private service: BoardsService) { }
+    private service: BoardsService,
+    private ticketsService: TicketsService) {
+      this.boardId = this.route.snapshot.paramMap.get('id');
+      this.fetchBoard(this.boardId);
+    }
 
   ngOnInit(): void {
-    this.boardId = this.route.snapshot.paramMap.get('id');
-    this.fetchBoard(this.boardId);
   }
 
   fetchBoard(boardId){
@@ -68,8 +73,14 @@ export class BoardComponent implements OnInit {
 
   openDialogCreateContainer(): void {
     const dialogRef = this.dialog.open(ContainerCreateComponent, {
-      width: '30%',
+      width: '450px',
       data: {currentBoard: this.board}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.board.containers.push(result["createdContainer"] as Container);
+      }
     });
   }
   
@@ -77,13 +88,40 @@ export class BoardComponent implements OnInit {
 
   openDialogCreateTicket(currentContainer: Container): void {
     const dialogRef = this.dialog.open(TicketCreateComponent, {
-      width: '30%',
+      width: '450px',
       data: {
         currentBoardId: this.board.id,
         currentContainerId: currentContainer.id,
         currentContainerLength: currentContainer.tickets.length
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        let ticket = result["createdTicket"] as Ticket;
+        this.board
+          .containers.find(container => container.id == ticket.containerId)
+          .tickets.push(ticket);
+      }
+    });
+  }
+
+  openDialogTicketDetails(ticket: Ticket){
+    this.router.navigateByUrl('tickets/' + ticket.id);
+    // console.log("ticket: " + JSON.stringify(ticket));
+    // let ticketToPass:Ticket;
+    
+    // this.ticketsService.getTicket(ticket.id).(result => {
+    //   console.log("result: " + JSON.stringify(result));
+    //   ticketToPass = result as Ticket;
+    // });
+    // console.log("ticketToPass: " + JSON.stringify(ticketToPass));
+    // const dialogRef = this.dialog.open(TicketDetailsComponent, {
+    //   width: '450px',
+    //   data: {
+    //     ticket: ticketToPass
+    //   }
+    // });
   }
 }
 

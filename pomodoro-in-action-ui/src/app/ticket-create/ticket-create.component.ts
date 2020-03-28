@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Router } from '@angular/router';
 import { TicketsService } from '../services/tickets.service';
+import { Ticket } from '../model/ticket';
 
 @Component({
   selector: 'app-ticket-create',
@@ -13,13 +13,11 @@ export class TicketCreateComponent implements OnInit {
   private currentBoardId: number;
   private currentContainerId: number;
   private currentContainerLength: number;
-  newTicketGroup: FormGroup;
-  private newTicketJson;
+  formGroup: FormGroup;
   
   constructor(    
     private formBuilder: FormBuilder,
     private containersService: TicketsService,
-    private router: Router,
     public dialogRef: MatDialogRef<TicketCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
       this.currentBoardId = data["currentBoardId"] as number;
@@ -32,42 +30,46 @@ export class TicketCreateComponent implements OnInit {
   }
 
   initCreateTicketForm() {
-    this.newTicketGroup = this.formBuilder.group({
-      displayName: ['', Validators.required],
+    this.formGroup = this.formBuilder.group({
+      name: ['', Validators.required],
       description: ['', []]
     });
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  onAddClick() {
-    console.log("*** onAddClick : ");
-
-    if (!this.newTicketGroup.valid) {
+  createNewTicket() {
+    if (!this.formGroup.valid) {
       return;
     }
 
-    this.newTicketJson = {
-      "displayName": this.newTicketGroup.value.displayName,
-      "description": this.newTicketGroup.value.description,
+    let newTicketJson = {
+      "displayName": this.formGroup.value.name,
+      "description": this.formGroup.value.description,
       "sortOrder": this.currentContainerLength,
       "kanbanContainerId": this.currentContainerId,
     };
 
-    this.containersService
-      .createNewTicket(
-        this.newTicketJson
-      )
-      .subscribe((res: any) => {
-        this.router
-          .navigate(['/boards/' + this.currentBoardId])
-          .then(() => {
-            window.location.reload();
-          });
+    console.log("newTicketJson: " + JSON.stringify(newTicketJson));
+
+    this.containersService.createNewTicket(newTicketJson)
+      .subscribe(response => {
+
+        console.log("response: " + JSON.stringify(response));
+
+        let createdTicket = 
+        {
+          id: response["id"],
+          displayName: response["displayName"],
+          description: response["description"],
+          containerId: response["kanbanContainerId"],
+        } as Ticket;
+
+        this.dialogRef.close({createdTicket: createdTicket});
       },
       err => {
       });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

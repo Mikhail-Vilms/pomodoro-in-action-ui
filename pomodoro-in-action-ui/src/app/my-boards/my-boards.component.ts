@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { BoardCreateComponent } from '../board-create/board-create.component';
 import { Board } from '../model/board';
 import { BoardsService } from '../services/boards.service';
 
@@ -12,7 +13,7 @@ export class MyBoardsComponent implements OnInit {
   boards: Board[];
 
   constructor(
-    private router: Router,
+    public dialog: MatDialog,
     private boardService: BoardsService) { }
 
   ngOnInit() {
@@ -27,7 +28,13 @@ export class MyBoardsComponent implements OnInit {
       })
   }
 
- gotoCreateNewBoard(){
-   this.router.navigate(['/create-board']);
- }
+  openDialogCreateBoard(): void{
+    const dialogRef = this.dialog.open(BoardCreateComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.boards.push(result["createdBoard"] as Board);
+    });
+  }
 }

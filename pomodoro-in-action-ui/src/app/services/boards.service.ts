@@ -12,12 +12,14 @@ export class BoardsService {
 
   constructor(private http: HttpClient) { }
   
-  createNewBoard(boardJson){
+  createNewBoard(newBoardJson){
     var headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token'),
     });
 
-    return this.http.post(this.BaseURI + '/api/boards', boardJson, {headers: headers});
+    console.log("newBoardJson: " + JSON.stringify(newBoardJson));
+    
+    return this.http.post(this.BaseURI + '/api/boards', newBoardJson, {headers: headers});
   }
 
   getPersonalBoards(){

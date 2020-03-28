@@ -1,63 +1,19 @@
-:host {
-    display: flex;
-    justify-content: center;
-    margin: 100px 0px;
-}
-
-.add-button{
-    color: white;
-    background-color: green;
-    float: right;
-}
-
-mat-card-title,
-mat-card-content {
-    display: flex;
-    justify-content: center;
-}
-
 .form {
-    min-width: 150px;
-    max-width: 500px;
     width: 100%;
 }
 
 .form-element {
-    padding: 4px 2px 4px 2px;
-    width: 100%;
-}
-
-.field-full-width {
+    padding: 5px 0px 7px 0px;
     width: 100%;
 }
 
 .button {
     display: flex;
     justify-content: flex-end;
-    padding: 1px 2px 18px 2px;
-}
-
-.social-button-div{
-    width: 100%;
-    padding: 0px 0px 20px 0px;
-}
-
-.social-button{
-    width: 100%;
-    padding: 5px 0px 5px 0px;
+    padding: 1px 0px 18px 2px;
 }
 
 .justify-center{
     display: flex;
     justify-content: center;
-}
-
-.divider{
-    padding: 0px 0px 20px 0px;
-}
-
-.general-error{
-    color: red;
-    font-weight: bolder;
-    padding: 0px 2px 0px 2px;
 }

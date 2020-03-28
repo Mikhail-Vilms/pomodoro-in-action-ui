@@ -16,4 +16,14 @@ export class TicketsService {
 
     return this.http.post(this.BaseURI + '/api/tickets', newTicketJson, {headers: headers});
   }
+
+  getTicket(ticketId){
+    var headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    });
+
+    console.log(this.BaseURI + '/api/tickets/' + ticketId);
+
+    return this.http.get(this.BaseURI + '/api/tickets/' + ticketId, {headers: headers});
+  }
 }
