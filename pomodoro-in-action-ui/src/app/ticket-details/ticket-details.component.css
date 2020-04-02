@@ -17,3 +17,27 @@
     display: flex;
     justify-content: center;
 }
+
+.ticket-card{
+    margin: 5% 0% 5% 0%;
+}
+
+.actions-title{
+    color:gray;
+    font-size: 100%;
+}
+
+.actions{
+    margin-bottom: 3%; 
+}
+
+.buttons{
+    padding: 3% 0% 0% 0%; 
+}
+
+.mat-raised-button.mat-save
+{
+  color: #f0fff3;
+  background-color: #155724;
+  float: right;
+}

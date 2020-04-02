@@ -1,10 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from '../model/ticket';
 import { TicketsService } from '../services/tickets.service';
-import { ActivatedRoute } from '@angular/router';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-ticket-details',
@@ -13,51 +11,33 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 })
 export class TicketDetailsComponent implements OnInit {
   private ticket: Ticket;
-  private editable: boolean;
   formGroup: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
-    private ticketsService: TicketsService,
+    private service: TicketsService,
     private route: ActivatedRoute) 
     {
-      this.editable = false;
       this.getTicket();
     }
 
   getTicket(): void {
     const ticketId = this.route.snapshot.paramMap.get('id');
-    this.ticketsService.getTicket(ticketId)
+    this.service.getTicket(ticketId)
       .subscribe(ticket => {
         this.ticket = ticket as Ticket;
-        
         this.formGroup.value.name = this.ticket.displayName;
         this.formGroup.setValue({
           name: this.ticket.displayName,
           description: this.ticket.description
         })
-        console.log("this.formGroup.value.name: " + this.formGroup.value.name);
       });
   }
 
   ngOnInit(): void {
     this.initForm();
-    
   }
-
-  // getTicket(ticketId): void {
-  //   this.ticketsService.getTicket(ticketId)
-  //     .subscribe(
-  //       (ticket) => {
-  //         this.ticket = ticket as Ticket;
-  //         console.log("1) this.ticket: " + JSON.stringify(this.ticket));
-  //       }, 
-  //       (err) => console.log(err),
-  //       () => {
-  //         this.formGroup.value.name = this.ticket.displayName;
-  //         this.formGroup.value.description = this.ticket.description;
-  //       });
-  // }
 
   initForm() {
     this.formGroup = this.formBuilder.group({
@@ -66,8 +46,32 @@ export class TicketDetailsComponent implements OnInit {
     });
   }
 
-  switchEditable(){
-
+  updateTicket(){
+    this.ticket.displayName = this.formGroup.value.name;
+    this.ticket.description = this.formGroup.value.description;
+    
+    this.service.updateTicket(this.ticket)      
+      .subscribe((res: any) => {
+        console.log(" *** PUT request to update Ticket with Id=" + this.ticket.id + " was successfully executed");
+        this.router.navigate(['/boards/' + this.ticket.kanbanContainer.boardId]);
+      },
+      err => {
+        console.log(err);
+      });
   }
-  
+
+  deleteTicket(){
+    this.service.deleteTicket(this.ticket.id)      
+      .subscribe((res: any) => {
+        console.log(" *** DELETE request for Ticket with Id=" + this.ticket.id + " was successfully executed");
+        this.router.navigate(['/boards/' + this.ticket.kanbanContainer.boardId]);
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  returnToBoard(){
+    console.log(" *** returnToBoard()) *** ");
+  }
 }

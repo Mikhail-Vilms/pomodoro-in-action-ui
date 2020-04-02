@@ -1,13 +1,17 @@
 <mat-toolbar color="primary">
   
-
-    <mat-icon aria-hidden="false" aria-label="Example home icon">
-      <a routerLink="/dashboard" routerLinkActive="active">home</a>
-    </mat-icon>
-
+  <button mat-button routerLink="/dashboard">Home</button>
 
   <span class="fill-remaining-space"></span>  
   
   <span class="fill-remaining-space">Pomodoro in Action</span>
-    
+
+  <span flex>
+    <button mat-button [matMenuTriggerFor]="menu">Account</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Log out</button>
+    </mat-menu>
+  </span>
+
 </mat-toolbar>

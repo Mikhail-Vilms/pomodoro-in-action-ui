@@ -46,15 +46,10 @@ export class TicketCreateComponent implements OnInit {
       "description": this.formGroup.value.description,
       "sortOrder": this.currentContainerLength,
       "kanbanContainerId": this.currentContainerId,
-    };
-
-    console.log("newTicketJson: " + JSON.stringify(newTicketJson));
+    }
 
     this.containersService.createNewTicket(newTicketJson)
       .subscribe(response => {
-
-        console.log("response: " + JSON.stringify(response));
-
         let createdTicket = 
         {
           id: response["id"],

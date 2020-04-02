@@ -41,8 +41,9 @@ export class BoardsService {
   setSortOrderForContainers(board: Board){
     return this.http.post(
       this.BaseURI + '/api/boards/' + board.id + '/set_sort_order', 
-      board.containers.map(container => container.id), 
-      this.getHeaders());
+      board.containers.map(container => container.id),
+      this.getHeaders()
+    );
   }
 
   setSortOrderForTickets(containerId: number, tickets: Ticket[]){

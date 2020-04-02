@@ -45,12 +45,19 @@ export class BoardComponent implements OnInit {
 
   dropContainer(event: CdkDragDrop<Container[]>) {
     moveItemInArray(this.board.containers, event.previousIndex, event.currentIndex);
-    this.service.setSortOrderForContainers(this.board).subscribe(response => console.log("response: " + JSON.stringify(response)));
+    this.service
+      .setSortOrderForContainers(this.board)
+      //.subscribe(response => console.log("response: " + JSON.stringify(response)));
+
+      .subscribe(response => {
+        console.log(" *** Containers was reordered successfully");
+      },
+      err => {
+        console.log(err);
+      });
   }
 
   dropTicket(event: CdkDragDrop<Ticket[]>, containerId) {
-    console.log("containerId: " + containerId);
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -108,20 +115,6 @@ export class BoardComponent implements OnInit {
 
   openDialogTicketDetails(ticket: Ticket){
     this.router.navigateByUrl('tickets/' + ticket.id);
-    // console.log("ticket: " + JSON.stringify(ticket));
-    // let ticketToPass:Ticket;
-    
-    // this.ticketsService.getTicket(ticket.id).(result => {
-    //   console.log("result: " + JSON.stringify(result));
-    //   ticketToPass = result as Ticket;
-    // });
-    // console.log("ticketToPass: " + JSON.stringify(ticketToPass));
-    // const dialogRef = this.dialog.open(TicketDetailsComponent, {
-    //   width: '450px',
-    //   data: {
-    //     ticket: ticketToPass
-    //   }
-    // });
   }
 }
 
