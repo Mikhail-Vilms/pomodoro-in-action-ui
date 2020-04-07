@@ -14,8 +14,12 @@
   font-size: 14px;
   font-weight: 700;
   padding: 20px 10px;
+  cursor: pointer;
 }
 
+.container-header:hover{
+  text-decoration: underline;
+}
  
 .new-container {
   width: 270px;

@@ -1,0 +1,43 @@
+.form {
+    width: 100%;
+}
+
+.form-element {
+    padding: 5px 0px 7px 0px;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1px 0px 18px 2px;
+}
+
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
+
+.ticket-card{
+    margin: 5% 0% 5% 0%;
+}
+
+.actions-title{
+    color:gray;
+    font-size: 100%;
+}
+
+.actions{
+    margin-bottom: 3%; 
+}
+
+.buttons{
+    padding: 3% 0% 0% 0%; 
+}
+
+.mat-raised-button.mat-save
+{
+  color: #f0fff3;
+  background-color: #155724;
+  float: right;
+}

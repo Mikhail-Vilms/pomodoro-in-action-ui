@@ -52,8 +52,7 @@ export class TicketDetailsComponent implements OnInit {
     
     this.service.updateTicket(this.ticket)      
       .subscribe((res: any) => {
-        console.log(" *** PUT request to update Ticket with Id=" + this.ticket.id + " was successfully executed");
-        this.router.navigate(['/boards/' + this.ticket.kanbanContainer.boardId]);
+        this.returnToBoard();
       },
       err => {
         console.log(err);
@@ -63,8 +62,7 @@ export class TicketDetailsComponent implements OnInit {
   deleteTicket(){
     this.service.deleteTicket(this.ticket.id)      
       .subscribe((res: any) => {
-        console.log(" *** DELETE request for Ticket with Id=" + this.ticket.id + " was successfully executed");
-        this.router.navigate(['/boards/' + this.ticket.kanbanContainer.boardId]);
+        this.returnToBoard();
       },
       err => {
         console.log(err);
@@ -72,6 +70,6 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   returnToBoard(){
-    console.log(" *** returnToBoard()) *** ");
+    this.router.navigate(['/boards/' + this.ticket.kanbanContainer.boardId]);
   }
 }

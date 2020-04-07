@@ -22,6 +22,7 @@ import { BoardComponent } from './board/board.component';
 import { ContainerCreateComponent } from './container-create/container-create.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
+import { ContainerDetailsComponent } from './container-details/container-details.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TicketDetailsComponent } from './ticket-details/ticket-details.componen
     ContainerCreateComponent,
     TicketCreateComponent,
     TicketDetailsComponent,
+    ContainerDetailsComponent,
 
   ],
   imports: [

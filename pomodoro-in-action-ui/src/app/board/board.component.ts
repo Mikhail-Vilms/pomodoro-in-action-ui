@@ -116,6 +116,8 @@ export class BoardComponent implements OnInit {
   openDialogTicketDetails(ticket: Ticket){
     this.router.navigateByUrl('tickets/' + ticket.id);
   }
+
+  routToContainer(container: Container){
+    this.router.navigateByUrl('containers/' + container.id);
+  }
 }
-
-

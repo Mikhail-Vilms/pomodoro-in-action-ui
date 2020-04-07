@@ -4,17 +4,11 @@
     <div cdkDropList [cdkDropListData]=board.containers cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropContainer($event)" >
 
       <div cdkDropListGroup class="canban-container" *ngFor="let container of board.containers" cdkDrag [cdkDragData]="container">
-        <h5 class="container-header">
-          {{container.displayName}} 
-          <span class="container-menu">
-            <span [matMenuTriggerFor]="menu">*</span>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Item 1</button>
-              <button mat-menu-item>Item 2</button>
-            </mat-menu>
-          </span>
-        </h5>
-
+        
+          <h5 class="container-header" (click)="routToContainer(container)">
+            {{container.displayName}}
+          </h5>
+        
         <div cdkDropList class="tickets-list" id={{container.id}} [cdkDropListData]=container.tickets (cdkDropListDropped)="dropTicket($event, container.id)" [cdkDropListConnectedTo]="getConnectedList()">
           <div class="ticket-box" *ngFor="let ticket of container.tickets" cdkDrag [cdkDragData]="ticket" (click)="openDialogTicketDetails(ticket)">{{ticket.displayName}}</div>
         </div>

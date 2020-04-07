@@ -1,0 +1,47 @@
+<app-main-toolbar></app-main-toolbar>
+
+<ng-container>
+    <div class="row">
+        <div class="col-sm-0 col-md-2 col-lg-3 col-xl-3"></div>
+        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
+            <mat-card class="ticket-card">
+                <form class="form" [formGroup]="formGroup">
+
+                    <mat-card-title>                    
+                        <mat-form-field class="form-element">
+                            <input matInput formControlName="name" required>
+                        </mat-form-field>
+                    </mat-card-title>
+                      
+                    <mat-card-content class="content">
+                        <mat-form-field class="form-element">
+                            <textarea 
+                                matInput
+                                cdkTextareaAutosize
+                                cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="20"
+                                placeholder="Description" 
+                                formControlName="description">
+                            </textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+
+                    <mat-card class = "actions">
+                        <mat-card-title class="actions-title"> 
+                            Actions:
+                        </mat-card-title>
+                        <button mat-raised-button color="warn" (click)="deleteContainer()">Delete</button>
+                    </mat-card>
+
+                    <mat-divider class="divider"></mat-divider>
+
+                    <div class="buttons">
+                        <button mat-raised-button (click)="returnToBoard()">Cancel & Return to Kanban Board</button>
+                        <button mat-raised-button color="save" (click)="updateContainer()">Save & Return to Kanban Board</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+        <div class="col-sm-0 col-md-2 col-lg-3 col-xl-3"></div>
+    </div>
+</ng-container>
