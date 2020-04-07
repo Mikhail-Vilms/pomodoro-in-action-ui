@@ -18,6 +18,11 @@ import { BoardGridElementComponent } from './board-grid-element/board-grid-eleme
 import { MyBoardsComponent } from './my-boards/my-boards.component';
 import { BoardCreateComponent } from './board-create/board-create.component';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
+import { BoardComponent } from './board/board.component';
+import { ContainerCreateComponent } from './container-create/container-create.component';
+import { TicketCreateComponent } from './ticket-create/ticket-create.component';
+import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
+import { ContainerDetailsComponent } from './container-details/container-details.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
     MyBoardsComponent,
     BoardCreateComponent,
     MainToolbarComponent,
+    BoardComponent,
+    ContainerCreateComponent,
+    TicketCreateComponent,
+    TicketDetailsComponent,
+    ContainerDetailsComponent,
 
   ],
   imports: [

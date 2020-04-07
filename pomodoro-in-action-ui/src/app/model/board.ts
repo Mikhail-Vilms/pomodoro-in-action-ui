@@ -1,3 +1,5 @@
+import { Container } from '../model/container';
+
 export class Board {
     id : number;
     displayName: string;
@@ -5,4 +7,7 @@ export class Board {
     sortOrder: number;
     isPublic: boolean;
     isArchived: boolean;
+
+    containers: Container[];
 }
+

@@ -1,18 +1,18 @@
-<div class="my-boards-toolbar">
-  <mat-form-field>
-    <mat-label>Search board by name</mat-label>
-    <input matInput type="search">
-  </mat-form-field>
-
-  <button mat-raised-button class="add-button" (click)="gotoCreateNewBoard()">Create new board</button>
-</div>
-
-<mat-divider class="divider"> </mat-divider>
+<h2>My Boards</h2>
+<mat-divider></mat-divider>
 
 <div class="cards-container">
+  
   <div class="card" *ngFor="let board of boards">
-    <h3>{{board.displayName}}</h3>
-    <mat-divider class="divider"> </mat-divider>
-    <p>{{board.description}}</p>
+    <a routerLink="/boards/{{board.id}}" routerLinkActive="active">
+      <h3>{{board.displayName}}</h3>
+      <mat-divider class="divider"> </mat-divider>
+      <p>{{board.description}}</p>
+    </a>
   </div>
+
+  <div class="new-card" (click)="openDialogCreateBoard()">
+    <h2>+</h2>
+  </div>
+
 </div>

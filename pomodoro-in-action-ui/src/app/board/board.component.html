@@ -1,0 +1,24 @@
+<app-main-toolbar></app-main-toolbar>
+
+<div class="scrollmenu">
+    <div cdkDropList [cdkDropListData]=board.containers cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropContainer($event)" >
+
+      <div cdkDropListGroup class="canban-container" *ngFor="let container of board.containers" cdkDrag [cdkDragData]="container">
+        
+          <h5 class="container-header" (click)="routToContainer(container)">
+            {{container.displayName}}
+          </h5>
+        
+        <div cdkDropList class="tickets-list" id={{container.id}} [cdkDropListData]=container.tickets (cdkDropListDropped)="dropTicket($event, container.id)" [cdkDropListConnectedTo]="getConnectedList()">
+          <div class="ticket-box" *ngFor="let ticket of container.tickets" cdkDrag [cdkDragData]="ticket" (click)="openDialogTicketDetails(ticket)">{{ticket.displayName}}</div>
+        </div>
+        
+        <div class="new-ticket-box" (click)="openDialogCreateTicket(container)">+</div>
+      </div>
+
+      <div class="new-container" (click)="openDialogCreateContainer()">
+        <h5 class="new-container-header">+ Add Container</h5>
+      </div>
+
+    </div>
+  </div>

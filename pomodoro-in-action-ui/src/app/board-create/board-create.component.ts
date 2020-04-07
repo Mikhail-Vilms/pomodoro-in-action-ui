@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { Board } from '../model/board';
 import { BoardsService } from '../services/boards.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-create',
@@ -11,10 +12,10 @@ import { Router } from '@angular/router';
 export class BoardCreateComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(    
-    private router: Router,
+  constructor(
     private fb: FormBuilder,
-    private boardsService: BoardsService) { }
+    private boardsService: BoardsService,
+    public dialogRef: MatDialogRef<BoardCreateComponent>,) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -23,17 +24,34 @@ export class BoardCreateComponent implements OnInit {
   createForm() {
     this.formGroup = this.fb.group({
       name: ['', [Validators.required]],
-      description: [''],
+      description: ['', []],
     });
   }
 
   createNewBoard(): void{
-    this.boardsService.createNewBoard({
+    if (!this.formGroup.valid) {
+      return;
+    }
+
+    let newBoardJson = {
       "displayName": this.formGroup.value.name,
-      "description": this.formGroup.value.description,
-      "sortOrder": 1
-    }).subscribe(response => {            
-      this.router.navigate(['/dashboard']);
-    })
+      "description": this.formGroup.value.description
+    };
+
+    this.boardsService.createNewBoard(newBoardJson)
+      .subscribe(response => {   
+        let createdBoard = 
+        {
+          id: response["id"],
+          displayName: response["displayName"],
+          description: response["description"],
+        } as Board;
+
+        this.dialogRef.close({createdBoard: createdBoard});
+      })
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
